@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인페이지</title>
+    <style>
+        .table {
+            width: 70%;
+        }
+        .input-group-size input, button {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">PyWeb</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li id="home"><a href="/">Home</a></li>
+                <li id="phone"><a href="{% url 'PB:I' %}">주소록</a></li>
+                <li id="board"><a href="{% url 'BD:I' 1 %}">게시판</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_active %}
+                    <li id="myinfo"><a href="/account/myinfo"><span class="glyphicon glyphicon-user"></span> {{ user }}</a></li>
+                    <li><a href="/account/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                {% else %}
+                    <li id="register"><a href="/account/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li id="login"><a href="/account/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div align="center">
+        {% block content %}{% endblock %}
+    </div>
+    {% block menu_active %}
+    <script>
+        document.getElementById("home").className="active";
+    </script>
+    {% endblock %}
+</body>
+</html>

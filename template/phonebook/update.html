@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function mainUrl(){
+            document.location.href="{% url 'PB:I' %}";
+        }
+    </script>
+</head>
+<body>
+    <h3>수정 페이지</h3>
+    <form method="post">
+        {% csrf_token %}
+        <table border="1">
+            <tr>
+                <th>이름</th>
+                <td><input type="text" value="{{ userInfo.이름 }}" name="name"></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="text" value="{{ userInfo.전화번호 }}" name="telnum"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td><input type="email" value="{{ userInfo.이메일 }}" name="email"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" value="{{ userInfo.주소 }}" name="addr"></td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td><input type="date" value="{{ userInfo.생년월일 | date:'Y-m-d'}}" name="birth"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="확인">
+                </td>
+            </tr>
+        </table>
+    </form>
+  </body>
+</html>

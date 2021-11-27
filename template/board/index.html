@@ -1,0 +1,54 @@
+{% extends 'index.html' %} 
+{% block content %}
+<style>
+    .buttonstyle {
+        width:30px;
+        height: 30px;
+    }
+</style> 
+<h3>게시판</h3>
+<table class="table table-striped">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+    </tr>
+    {% for board in boardTable %} 
+    <tr>
+        <td>{{ board.id }}</td>
+        <td>
+            {% if user.username != '' %}
+                <a href="{% url 'BD:D' board.id %}">{{ board.제목 }}</a>
+            {% else %} 
+                <a href="{% url 'login' %}">{{ board.제목 }}</a>
+            {% endif %}
+        </td>
+        <td>{{ board.작성자 }}</td>
+        <td>{{ board.조회수 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+    {% if user.is_active %}
+        <input type="button" class="btn btn-success" onclick=document.location.href='{% url "BD:A" %}' value="글쓰기">
+    {% endif %}
+    <br><br>
+    {% if boardTable.has_previous %}
+        <input type="button" class="btn btn-primary" value="이전" onclick=document.location.href="{% url 'BD:I' boardTable.previous_page_number %}">
+    {% else %}
+        <input type="button" class="btn btn-primary" value="이전" disabled>
+    {% endif %}
+    {% for i in boardTable.paginator.page_range %}
+        <a href="{% url 'BD:I' i %}"><button class="buttonstyle">{{ i }}</button></a>
+    {% endfor %}
+    {% if boardTable.has_next %}
+        <input type="button" value="다음" class="btn btn-primary" onclick=document.location.href="{% url 'BD:I' boardTable.next_page_number %}">
+    {% else %}
+        <input type="button" value="다음" class="btn btn-primary" disabled>
+    {% endif %}
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("board").className="active";
+</script>
+{% endblock %}

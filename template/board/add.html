@@ -1,0 +1,43 @@
+{% extends 'index.html' %} 
+{% block content %} 
+<style>
+    .input-group {
+        margin: 10px;
+        width : 60%;
+    }
+    .input-group-size {
+        padding: 10px;
+    }
+    .input-group-size input, button {
+        width: 100px;
+    }
+    .input-group-addon{
+        width : 30%;
+    }
+</style>
+<h3>게시판 글쓰기</h3>
+<form method="post" name="frm" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="input-group">
+        <span class="input-group-addon">제목</i></span>
+        <input type="text" class="form-control" name="title" placeholder="제목 입력">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">내용</i></span>
+        <textarea name="context" class="form-control" rows='8' placeholder="내용 입력"></textarea>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">파일</i></span>
+        <input type="file" name="files" class="form-control" multiple>
+      </div>
+      <div class="input-group-size">
+        <input class="btn btn-success" type="submit" value="글저장">
+        <input class="btn btn-warning" type="reset" value="다시 입력">
+        <input type="button" class="btn btn-info" onclick="document.location.href='/'" value="메인">
+    </div>
+    </form>
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("board").className="active";
+</script>
+{% endblock %}

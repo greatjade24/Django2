@@ -1,0 +1,60 @@
+{% extends 'index.html' %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function mainUrl(){
+            document.location.href="{% url 'PB:I' %}";
+        }
+    </script>
+</head>
+<body>
+    <h3>상세 페이지</h3>
+    <table class="table table-striped">
+        <tr>
+            <th>이름</th>
+            <td>{{ userInfo.이름 }}</td>
+        </tr>
+        <tr>
+            <th>전화번호</th>
+            <td>{{ userInfo.전화번호 }}</td>
+        </tr>
+        <tr>
+            <th>이메일</th>
+            <td>{{ userInfo.이메일 }}</td>
+        </tr>
+        <tr>
+            <th>주소</th>
+            <td>{{ userInfo.주소 }}</td>
+        </tr>
+        <tr>
+            <th>생년월일</th>
+            <td>{{ userInfo.생년월일 }}</td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td>{{ userInfo.작성자 }}</td>
+        </tr>
+    </table>
+    <div class="input-group-size">
+        {% if user.username == userInfo.작성자 or user.username == 'admin' %}
+            <input class="btn btn-success" type="button" onclick=document.location.href="{% url 'PB:U' userInfo.id %}" value="수정">
+            <input class="btn btn-warning" type="button" onclick=document.location.href="{% url 'PB:L' userInfo.id %}" value="삭제">
+        {% endif %}
+        <input type="button" class="btn btn-info" onclick="document.location.href='/'" value="메인">
+        
+        
+    </div>
+</body>
+</html>
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("phone").className="active";
+</script>
+{% endblock %}

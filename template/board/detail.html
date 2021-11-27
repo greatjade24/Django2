@@ -1,0 +1,43 @@
+{% extends 'index.html' %} 
+{% block content %} 
+<h3>게시판 상세</h3>
+<table class="table table-striped">
+    <tr>
+        <th>제목</th>
+        <td>{{ boardInfo.제목 }}</td>
+    </tr>
+    <tr>
+        <th>작성일</th>
+        <td>{{ boardInfo.작성일 }}</td>
+    </tr>
+    <tr>
+        <th>수정일</th>
+        <td>{{ boardInfo.수정일 }}</td>
+    </tr>
+    <tr>
+        <th>내용</th>
+        <td>{{ boardInfo.내용 }}</td>
+    </tr>
+    <tr>
+        <th>작성자</th>
+        <td>{{ boardInfo.작성자 }}</td>
+    </tr>
+    <tr>
+        <th>조회수</th>
+        <td>{{ boardInfo.조회수 }}</td>
+    </tr>
+    {% for x in dirList %}
+    <tr>
+        <th>파일명{{ forloop.counter }}</th>
+        <td><a href="{% url 'BD:down' boardInfo.id x %}">{{ x }}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<input type="button" class="btn btn-success" onclick=document.location.href='{% url "BD:U" boardInfo.id %}' value="수정">
+<input type="button" class="btn btn-danger" onclick=document.location.href='{% url "BD:L" boardInfo.id %}' value="삭제">
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("board").className="active";
+</script>
+{% endblock %}

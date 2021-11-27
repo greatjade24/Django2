@@ -1,0 +1,48 @@
+{% extends 'index.html' %} 
+{% block content %} 
+<style>
+    .input-group {
+        margin: 10px;
+        width : 60%;
+    }
+    .input-group-size {
+        padding: 10px;
+    }
+    .input-group-size input, button {
+        width: 100px;
+    }
+    .input-group-addon{
+        width : 30%;
+    }
+</style>
+<h3>게시판 수정</h3>
+<form method="post" name="frm"> {% csrf_token %}
+    <div class="input-group">
+        <span class="input-group-addon">제목</i></span>
+        <input type="text" class="form-control" name="title" value={{ boardInfo.제목 }}>
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">내용</i></span>
+        <textarea name="context" class="form-control" rows='8'>{{ boardInfo.내용 }}</textarea>
+      </div>
+      {% for x in dirList %}
+        <div class="input-group">
+            <span class="input-group-addon">파일명{{ forloop.counter }}</span>
+            <span class="form-control">
+                {{ x }} 
+                <input type="button" onclick=document.location.href="{% url 'BD:del' boardInfo.id x %}" value="삭제">
+            </span>
+        </div>
+      {% endfor %}
+      <div class="input-group-size">
+        <input class="btn btn-success" type="submit" value="글수정">
+        <input class="btn btn-warning" type="reset" value="다시 입력">
+        <input type="button" class="btn btn-info" onclick="document.location.href='/'" value="메인">
+    </div>
+    </form>
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("board").className="active";
+</script>
+{% endblock %}

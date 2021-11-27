@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block content %}
+    upload 페이지<br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="files" multiple><br>
+        <input type="submit" value="전송">
+    </form>
+{% endblock %}

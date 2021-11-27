@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function pwCheck(){
+            pw1 = frm.password.value;
+            pw2 = frm.pwchk.value;
+
+            if(pw1 == pw2){
+                alert('암호 확인이 일치합니다.');
+            } else {
+                alert('암호 확인이 일치 하지 않습니다. 다시 입력 하세요.');
+                frm.password.value = "";
+                frm.pwchk.value = "";
+                frm.password.focus();
+            }
+        }
+    </script>
+    <style>
+        .input-group {
+            margin: 10px;
+            width : 60%;
+        }
+        .input-group-size {
+            padding: 10px;
+        }
+        .input-group-size input, button {
+            width: 100px;
+        }
+        .input-group-addon{
+            width : 30%;
+        }
+    </style>
+</head>
+<body>
+    <h3>계정등록 페이지</h3>
+    <form method="post" name="frm"> {% csrf_token %}
+    <div class="input-group">
+        <span class="input-group-addon">아이디</i></span>
+        <input type="text" class="form-control" name="username" placeholder="아이디 입력">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">암호</i></span>
+        <input type="password" class="form-control" name="password" placeholder="암호 입력">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">암호 확인</i></span>
+        <input type="password" class="form-control" name="pwchk" placeholder="암호 확인 입력" onchange="pwCheck()">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">이름</i></span>
+        <input type="text" class="form-control" name="first_name" placeholder="이름 입력">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">성</i></span>
+        <input type="text" class="form-control" name="last_name" placeholder="성 입력">
+      </div>
+      <div class="input-group">
+        <span class="input-group-addon">이메일</i></span>
+        <input type="email" class="form-control" name="email" placeholder="이메일 입력">
+      </div>
+      <div class="input-group-size">
+        <input class="btn btn-success" type="submit" value="회원가입">
+        <input class="btn btn-warning" type="reset" value="다시 입력">
+        <input type="button" class="btn btn-info" onclick="document.location.href='/'" value="메인">
+    </div>
+    </form>
+</body>
+</html>
+{% endblock %}
+{% block menu_active %}
+<script>
+    document.getElementById("register").className="active";
+</script>
+{% endblock %}

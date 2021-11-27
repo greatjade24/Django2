@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>추가 페이지</h3>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table table-striped">
+            <tr>
+                <th>이름</th>
+                <td><input type="text" placeholder="이름 입력" name="name"></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="text" placeholder="전화번호 입력" name="telnum"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td><input type="email" placeholder="이메일 입력" name="email"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" placeholder="주소 입력" name="addr"></td>
+            </tr>
+            <tr>
+                <th>생년월일</th>
+                <td><input type="date" name="birth"></td>
+            </tr>
+        </table>
+        <button type="submit">주소 추가</button>
+    </form>
+</body>
+</html>
+{% endblock %}
+{% block menu_active %}
+    <script>
+        document.getElementById("phone").className="active";
+    </script>
+{% endblock %}

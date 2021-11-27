@@ -1,0 +1,6 @@
+{% extends 'index.html' %} 
+{% block content %}
+    {% for x in dirList %}
+        <a href="{% url 'BD:down' x %}">{{ x }}</a><br>
+    {% endfor %}
+{% endblock %}
